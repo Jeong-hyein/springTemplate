@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- <mapper namespace="com.dbal.app.emp.mapper.EmpDAO"> -->
+<mapper namespace="com.dbal.app.emp.mapper.EmpMapper">
+<!-- #{}, test 는 VO에 있는 필드를 가져오는거다 -->
+	<select id="getEmp" parameterType="com.dbal.app.emp.EmpVO" resultType="com.dbal.app.emp.EmpVO">
+		SELECT first_name,
+		last_name,
+		email,
+		hire_date,
+		job_id
+		FROM employees
+		WHERE employee_id = #{employeeId}
+	</select>
+
+<!-- parameterType="com.dbal.app.emp.EmpVO" 를 안써줘도 사용가능 -->
+	<select id="getEmpList" resultType="com.dbal.app.emp.EmpVO" parameterType="com.dbal.app.emp.EmpVO" >
+		SELECT * 
+		FROM employees
+		
+		<where>
+		<!-- if 동적쿼리 -->
+		<if test="departmentId != null">
+			department_id = #{departmentId}
+		</if>
+		<if test="employeeId != null">
+			and employee_id = #{employeeId}
+		</if>
+		<if test="salary != null">
+		  <![CDATA[ and salary < #{salary} ]]>
+		</if>
+		<if test="firstName != null">
+			and upper(first_name) like '%' || upper(#{firstName}) || '%'
+		</if>
+		
+		<!-- in(100,101)에서  구분기호: separator, ( : open, ) : close, 루프변수: collection(읽을거?) -->
+		<if test="employeeIds != null">
+			and employee_id in 
+				<foreach collection="employeeIds" item="id" open="(" close=")" separator=",">  
+					#{id}
+				</foreach>
+		</if>
+		
+		</where>
+		
+		
+		ORDER BY FIRST_NAME
+	</select>
+
+	<insert id="insertEmp" parameterType="com.dbal.app.emp.EmpVO">
+		INSERT INTO EMPLOYEES (employee_id, 
+							   first_name, 
+							   last_name,
+							   email,
+							   hire_date,
+							   job_id)
+						VALUES(
+							   #{employeeId},
+							   #{firstName},
+							   #{lastName},
+							   #{email},
+							   #{hireDate},
+							   #{jobId})
+	</insert>
+
+	<select id="getName" resultType="java.lang.String" parameterType="java.lang.Integer" >
+		select first_name from employees where employee_id = #{value}
+	</select>
+	
+	<select id="getCnt" resultType="int">
+		select count(*) from employees
+	</select>
+	
+	<select id="getEmpMap" resultType="map">
+		select * from employees order by first_name
+	</select>
+	
+	<select id="getDeptEmpCnt" resultType="map">
+		SELECT TO_CHAR(DEPARTMENT_ID) "name", COUNT(*) "cnt"
+		FROM EMPLOYEES
+		GROUP BY TO_CHAR(DEPARTMENT_ID)
+	</select>
+	
+	
+	<update id="updateEmp" parameterType="com.dbal.app.emp.EmpVO">
+		UPDATE EMPLOYEES
+		SET
+		FIRST_NAME = #{firstName}
+		WHERE
+		EMPLOYEE_ID = #{employeeId}
+	</update>
+
+	<delete id="deleteEmp" parameterType="com.dbal.app.emp.EmpVO">
+		DELETE FROM EMPLOYEES WHERE
+		EMPLOYEE_ID = #{employeeId}
+	</delete>
+
+</mapper>
