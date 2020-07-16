@@ -18,13 +18,13 @@ public class EmpMapperClient {
 
 	@Autowired EmpMapper empMapper;
 	
-	//@Test
-	public void getEmp() {
-		EmpVO vo = new EmpVO();
-		vo.setEmployeeId("100");
-		EmpVO result = empMapper.getEmp(vo);
-		System.out.println(result);
-	}
+//	//@Test
+//	public void getEmp() {
+//		EmpVO vo = new EmpVO();
+//		vo.setEmployeeId("100");
+//		EmpVO result = empMapper.getEmp(vo);
+//		System.out.println(result);
+//	}
 	
 	//@Test
 	public void getName() {

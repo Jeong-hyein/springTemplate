@@ -18,17 +18,17 @@ public class EmpDAOClient {
 	
 	@Autowired EmpDAO dao;
 	
-	@Test
-	public void empListTest() {
-		EmpVO empVO = new EmpVO();
-		//empVO.setDepartmentId("90");
-		//empVO.setEmployeeId("100");
-		//empVO.setSalary(3000);
-		//empVO.setFirstName("Steven");
-		empVO.setEmployeeIds(new Integer[] {100,101,102});
-		List<EmpVO> list = dao.getEmpList(empVO);
-		System.out.println(list);
-	}
+//	@Test
+//	public void empListTest() {
+//		EmpVO empVO = new EmpVO();
+//		//empVO.setDepartmentId("90");
+//		//empVO.setEmployeeId("100");
+//		//empVO.setSalary(3000);
+//		//empVO.setFirstName("Steven");
+//		empVO.setEmployeeIds(new Integer[] {100,101,102});
+//		List<EmpVO> list = dao.getEmpList(empVO);
+//		System.out.println(list);
+//	}
 	
 	
 	
