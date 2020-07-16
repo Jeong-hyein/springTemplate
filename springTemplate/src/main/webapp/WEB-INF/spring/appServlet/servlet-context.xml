@@ -4,7 +4,9 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
@@ -86,7 +88,13 @@
 			<aop:before method="beforeLog" pointcut-ref="allpointcut"/>
 		</aop:aspect>
 	</aop:config> -->
-	
+
 	<aop:aspectj-autoproxy proxy-target-class="true"/>  <!-- aspect관련 annotation을 스캔함 -->
 
+	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+	<!-- 쓰레드 몇개로 할건지 -->
+	<task:scheduler id="jobScheduler" pool-size="10" />	
+	<!-- 스케쥴과 관련된거 다 스캔함 -->
+	<task:annotation-driven scheduler="jobScheduler" />
+	
 </beans:beans>
