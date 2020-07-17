@@ -28,7 +28,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="2"></beans:property>
+		<beans:property name="order" value="3"></beans:property>
 	</beans:bean>
 
 	<context:component-scan
@@ -47,8 +47,13 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
-		<beans:property name="order" value="1" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
+	
+	<beans:bean id="viewResolver"
+    class="org.springframework.web.servlet.view.BeanNameViewResolver">
+    <beans:property name="order" value="1"></beans:property>
+    </beans:bean>
 
 	<!-- MultipartResolver 설정 -->
 	<beans:bean id="multipartResolver"
@@ -96,5 +101,7 @@
 	<task:scheduler id="jobScheduler" pool-size="10" />	
 	<!-- 스케쥴과 관련된거 다 스캔함 -->
 	<task:annotation-driven scheduler="jobScheduler" />
+	
+	
 	
 </beans:beans>

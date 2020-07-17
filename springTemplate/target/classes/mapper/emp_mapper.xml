@@ -5,6 +5,10 @@
 <!-- <mapper namespace="com.dbal.app.emp.mapper.EmpDAO"> -->
 <mapper namespace="com.dbal.app.emp.mapper.EmpMapper">
 <!-- #{}, test 는 VO에 있는 필드를 가져오는거다 -->
+
+
+
+
 	<select id="getEmp" parameterType="com.dbal.app.emp.EmpVO" resultType="com.dbal.app.emp.EmpVO">
 		SELECT first_name,
 		last_name,
@@ -55,15 +59,31 @@
 							   last_name,
 							   email,
 							   hire_date,
-							   job_id)
+							   job_id,
+							   profile)
 						VALUES(
-							   #{employeeId},
+							   (select nvl(max(employee_id),0)+1 from employees),
 							   #{firstName},
 							   #{lastName},
 							   #{email},
 							   #{hireDate},
-							   #{jobId})
+							   #{jobId},
+							   #{profile})
 	</insert>
+
+	<insert id="insertEmpProc" statementType="CALLABLE">
+		{call employee_ins(
+			#{firstName},
+			#{lastName},
+			#{email},
+			#{hireDate},
+			#{jobId},
+			#{employeeId, mode=OUT, jdbcType=VARCHAR},
+			#{msg, mode=OUT, jdbcType=VARCHAR}
+		)}
+
+	</insert>
+
 
 	<select id="getName" resultType="java.lang.String" parameterType="java.lang.Integer" >
 		select first_name from employees where employee_id = #{value}

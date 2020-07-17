@@ -3,6 +3,7 @@ package com.dbal.app.emp;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class EmpMapperClient {
 		System.out.println(first_name);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void getEmpMap() {
 		EmpVO vo = new EmpVO();
 		//List<HashMap<String, EmpVO>> list = empMapper.getEmpMap();
@@ -43,6 +44,20 @@ public class EmpMapperClient {
 		//첫번째 사원의 이름만 출력
 		System.out.println("첫번째이름: " + list.get(0));
 	}
+	
+	@Test
+	public void insertEmp() {
+		EmpVO vo = new EmpVO();
+		vo.setFirstName("san");
+		vo.setLastName("sam");
+		vo.setEmail("bnm@bnm");
+		vo.setHireDate("2020/01/01");
+		vo.setJobId("IT_PROG");
+		empMapper.insertEmpProc(vo);
+		System.out.println(vo.getMsg());
+	}
+	
+	
 	
 	
 }

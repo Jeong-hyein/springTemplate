@@ -31,7 +31,7 @@ public class Scheduler {
 		System.out.println(dumyService.getTime());
 	}
 	
-	@Scheduled(fixedRate = 2000)
+	//@Scheduled(fixedRate = 2000)
 	public void crontest4() {
 		System.out.println(dumyService.getTime());
 	}
