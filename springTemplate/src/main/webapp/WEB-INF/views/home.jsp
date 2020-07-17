@@ -7,6 +7,7 @@
 	<title>Home</title>
 </head>
 <body>
+	
 ${evo.firstName} :
 ${evo.lastName}
 <%-- ${param.lastName} requestparam의 값을 보려면--%>
@@ -16,6 +17,8 @@ ${evo.lastName}
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<a href="empList.do">사원목록</a>
+<a href="empList.do">사원목록</a> <br><br>
+
+<img src="./images/common.jpg">
 </body>
 </html>

@@ -1,8 +1,7 @@
 package com.dbal.app.emp;
 
-import java.sql.Date;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +12,11 @@ import lombok.NoArgsConstructor;
 @Data    // get,set,toString
 @NoArgsConstructor //인수가 없는 빈 생성자
 public class EmpVO {
+	
+	MultipartFile[] uploadFile; //파일업로드에 필요
+	String msg; 
+	String profile;  //파일 업로드에 필요
+	
 	@JsonProperty(value = "id")
 	String employeeId;
 	
@@ -20,8 +24,10 @@ public class EmpVO {
 	String lastName;
 	String email;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH")
-	Date hireDate;		//LocalDateTimem, Date  -> String은 안된다.
+	//@JsonFormat(pattern = "yyyy-MM-dd HH")
+	// Date hireDate;		//LocalDateTimem, Date  -> String은 안된다.
+	
+	String hireDate;
 	
 //	@JsonIgnore 안쓰는거에 붙이면 안나옴
 	@JsonIgnore 

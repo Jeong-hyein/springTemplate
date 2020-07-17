@@ -33,7 +33,13 @@ public class EmpServiceImpl implements EmpService {
 	public void insertEmp(EmpVO empVO) {
 		empMapper.insertEmp(empVO);
 	}
-
+	
+//	@Override
+//	public void insertEmp(EmpVO empVO) {
+//		System.out.println("프로시저 호출");
+//		empMapper.insertEmpProc(empVO);
+//	}
+	
 	@Override
 	public void updateEmp(EmpVO empVO) {
 		empMapper.insertEmp(empVO);

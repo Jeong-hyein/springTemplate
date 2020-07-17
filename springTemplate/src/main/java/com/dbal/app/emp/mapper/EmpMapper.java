@@ -15,4 +15,8 @@ public interface EmpMapper {
 	public String getName(Integer empid);
 	public List<Map<String, Object>> getEmpMap();
 	public List<Map<String, Object>> getDeptEmpCnt();
+	
+	//procedure
+	public void insertEmpProc(EmpVO empVO);
+	
 }
