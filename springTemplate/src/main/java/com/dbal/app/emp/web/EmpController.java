@@ -67,8 +67,7 @@ public class EmpController {
 			file.transferTo(upFile);
 			} 
 		vo.setProfile(filename);  //db에는 파일이름이 
-		//FileService.i
-		nsert();
+		//FileService.insert();
 		}
 		//서비스 호출
 		empService.insertEmp(vo);
