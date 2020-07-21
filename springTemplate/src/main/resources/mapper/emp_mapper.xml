@@ -7,8 +7,6 @@
 <!-- #{}, test 는 VO에 있는 필드를 가져오는거다 -->
 
 
-
-
 	<select id="getEmp" parameterType="com.dbal.app.emp.EmpVO" resultType="com.dbal.app.emp.EmpVO">
 		SELECT first_name,
 		last_name,
