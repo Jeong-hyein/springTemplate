@@ -30,6 +30,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="label_style" fontName="함초롱"/>
 	<subDataset name="jobDataSet" uuid="9e1f8c6c-f4f1-4080-944c-8eb748d4bf76">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="hr"/>
@@ -37,7 +38,7 @@
 		<queryString language="SQL">
 			<![CDATA[select *
 from job_history
-where employee_id =  $P{p_empId} ]]>
+where employee_id =  $P{p_empId}]]>
 		</queryString>
 		<field name="EMPLOYEE_ID" class="java.math.BigDecimal">
 			<property name="com.jaspersoft.studio.field.label" value="EMPLOYEE_ID"/>
@@ -102,36 +103,36 @@ order by employee_id]]>
 		<band height="13" splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="111" height="30" uuid="e7aa4285-9efa-4a39-b281-2426488abdab">
+				<reportElement style="label_style" x="0" y="0" width="111" height="30" uuid="e7aa4285-9efa-4a39-b281-2426488abdab">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5c4059a4-52c5-41f5-97ac-535ccc6e4ed2"/>
 				</reportElement>
-				<text><![CDATA[EMPLOYEE_ID]]></text>
+				<text><![CDATA[사원번호]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="111" y="0" width="111" height="30" uuid="35c54045-c503-46a2-a1ce-18496a526695">
+				<reportElement style="label_style" x="111" y="0" width="111" height="30" uuid="35c54045-c503-46a2-a1ce-18496a526695">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="facf57ca-2dcf-413d-b351-42e16dbf6efe"/>
 				</reportElement>
-				<text><![CDATA[FIRST_NAME]]></text>
+				<text><![CDATA[이름]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="222" y="0" width="111" height="30" uuid="e545bf7e-0dec-4b76-b875-12c4b53be222">
+				<reportElement style="label_style" x="222" y="0" width="111" height="30" uuid="e545bf7e-0dec-4b76-b875-12c4b53be222">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="74105642-ec1b-4575-85d3-7655b7bd26a0"/>
 				</reportElement>
-				<text><![CDATA[LAST_NAME]]></text>
+				<text><![CDATA[성]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="333" y="0" width="111" height="30" uuid="3dd74163-73ec-4fb0-ab79-26258c7aa457">
+				<reportElement style="label_style" x="333" y="0" width="111" height="30" uuid="3dd74163-73ec-4fb0-ab79-26258c7aa457">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="802e57d3-8830-460a-9928-f67415fc4d2b"/>
 				</reportElement>
-				<text><![CDATA[EMAIL]]></text>
+				<text><![CDATA[이메일]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="444" y="0" width="106" height="30" uuid="fcf886e7-5359-4a69-bdeb-9ec1a15556d1">
+				<reportElement style="label_style" x="444" y="0" width="106" height="30" uuid="fcf886e7-5359-4a69-bdeb-9ec1a15556d1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8cf98f64-e004-4527-891f-e4fcaf40d50d"/>
 				</reportElement>
-				<text><![CDATA[DEPARTMENT_ID]]></text>
+				<text><![CDATA[부서아이디]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -174,7 +175,7 @@ order by employee_id]]>
 				</graphicElement>
 			</line>
 			<componentElement>
-				<reportElement x="0" y="50" width="555" height="110" uuid="c0310eff-1dfc-4438-a5cf-6f30d601817e">
+				<reportElement isPrintRepeatedValues="false" x="0" y="50" width="555" height="110" uuid="c0310eff-1dfc-4438-a5cf-6f30d601817e">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -190,8 +191,8 @@ order by employee_id]]>
 					<jr:column width="110" uuid="2e112508-ac42-45ac-811b-61660fb421ed">
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="110" height="30" uuid="4be5916b-2d38-4c56-9330-4661da6c2c0f"/>
-								<text><![CDATA[EMPLOYEE_ID]]></text>
+								<reportElement style="label_style" x="0" y="0" width="110" height="30" uuid="4be5916b-2d38-4c56-9330-4661da6c2c0f"/>
+								<text><![CDATA[사원번호]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">

@@ -100,12 +100,21 @@ public class EmpController {
 	}
 
 	
+//	//단건조회
+//	@RequestMapping("/getEmp/{employeeId}/{firstName}")  //getEmp?employeeId=aaaa, 여러개도 가능 /{firstName}
+//	public String getEmp(@PathVariable Integer employeeId, @PathVariable String firstName) {
+//		System.out.println(employeeId + " : " + firstName);
+//		return "home";
+//	}
+	
 	//단건조회
-	@RequestMapping("/getEmp/{employeeId}/{firstName}")  //getEmp?employeeId=aaaa, 여러개도 가능 /{firstName}
-	public String getEmp(@PathVariable Integer employeeId, @PathVariable String firstName) {
-		System.out.println(employeeId + " : " + firstName);
-		return "home";
+	@RequestMapping("/getEmp/{employeeId}")  //getEmp?employeeId=aaaa, 여러개도 가능 /{firstName}
+	public String getEmp(@PathVariable String employeeId, Model model, EmpVO empVO) {
+		empVO.setEmployeeId(employeeId);
+		model.addAttribute("emp", empService.getEmp(empVO));
+		return "empty/emp/getEmp"; //tiles가 필요없어서 empty붙임
 	}
+	
 	
 	//목록조회
 	@RequestMapping("empList")
@@ -174,6 +183,12 @@ public class EmpController {
 	}
 	
 	//
+	@RequestMapping("getEmpAjax")
+	@ResponseBody //자바구조를 json구조로 바꿔줌
+	public EmpVO getEmpAjax(EmpVO empVO) {
+		return empService.getEmp(empVO);
+		
+	}
 	
 	
 	
