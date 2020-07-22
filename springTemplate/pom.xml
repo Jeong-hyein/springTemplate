@@ -218,11 +218,20 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- report -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.4.0</version>
+			<version>6.13.0</version>
 		</dependency>
+		
+		<!-- report-font -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.13.0</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

@@ -17,7 +17,7 @@ public class EmpVO {
 	String msg; 
 	String profile;  //파일 업로드에 필요
 	
-	@JsonProperty(value = "id")
+	//@JsonProperty(value = "id")
 	String employeeId;
 	
 	String firstName;
