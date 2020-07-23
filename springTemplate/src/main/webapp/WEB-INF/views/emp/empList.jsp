@@ -11,7 +11,7 @@
 <script>
 $(function(){
 	$(".empId").on("click", function() {
-		var empid = $(this).html(); // this: 클릭한거를 가르킴
+		var empid = $(this).html(); /* this: 클릭한거를 가르킴 */
 		var url = "getEmp/" + empid;
 		//$("#getEmpDiv").load(url) -> html 페이지에 바로 나오게한다 
 		//두번째는 서버로 넘겨줄 값: employeeId? + empid도 가능
