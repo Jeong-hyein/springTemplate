@@ -19,7 +19,8 @@
 		select id,
 		password, name, role
 		from users
-		where id=#{id}
+		where id=#
+		{id}
 	</select>
 	<select id="getUserListMap" parameterType="user" resultType="map">
 		select id        "id", 

@@ -46,6 +46,7 @@ public class RestfulUserController {
 		return result;
 	}
 	//등록
+	
 	@RequestMapping(value="/users"
 			,method=RequestMethod.POST
             ,headers = {"Content-type=application/json" }
