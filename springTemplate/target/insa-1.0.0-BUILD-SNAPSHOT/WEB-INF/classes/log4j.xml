@@ -32,7 +32,7 @@
 		<level value="info" />
 	</logger>
 
-    <logger name="jdbc.sqltiming" additivity="false">
+<!--     <logger name="jdbc.sqltiming" additivity="false">
         <level value="DEBUG"/>
         <appender-ref ref="console"/>
     </logger>
@@ -43,11 +43,11 @@
     <logger name="jdbc.resultsettable" additivity="false">
         <level value="DEBUG"/>
         <appender-ref ref="console"/>
-    </logger> 
+    </logger>  -->
     
 	<!-- Root Logger warn-->
 	<root>
-		<priority value="warn" />
+		<priority value="error" />
 		<appender-ref ref="console" />
 	</root>
 	

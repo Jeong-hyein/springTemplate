@@ -1,57 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
   <head>
-    <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.load('current', {'packages':['corechart','bar']}); //모든 차트 다 다운 받고싶을떄
       google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
       function drawChart() {
-      
-        //AJAX로 데이터 
-        var chartData = [];
-        $.ajax({ 
-			url : "./getChartData.do",
-			method : "post",
-			type : "json",
-			async : false,
-			success : function(data) {
-				//ajax결과를 chart에 맞는 data 형태로 가공
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', '부서');
+          data.addColumn('number', '사원수');
+          var chartdata = [];
+          $.ajax({
+        	  url: "getChartData.do",
+        	  async : false,      //동기식, 아작스 실행하고 데이터 값이 와야 실행(동기)
+        	  success : function(result) {
+        	  	for(i=0; i<result.length; i++) {
+        	  		chartdata.push([result[i].name, parseInt(result[i].cnt)]);
+        	  	}
+        	  }
+          });
+          data.addRows(chartdata);//아작스로 데이터 가져온거
 
-				chartData.push(['사원명','사원수'])
-				for(i=0; i<data.length; i++) {
-					var subarr = [data[i].name, parseInt(data[i].cnt) ];
-					chartData.push(subarr);
-				}
-			}
-        });
+          // Set chart options
+          var options = {'title':'부서별 인원수',
+                         'width':800,
+                         'height':600,
+                         is3D: true,
+                         vAxis: { format:'0,000', gridlines: {count:10}} , //gridlines: 선이 생김
+                         colors: ['#e6693e', '#f6c7b6', '#ec8f6e', '#f3b49f', '#f6c7b6']};
 
-        // Set chart options
-        var options = {'title':'부서별 인원수',
-                       'width':400,
-                       'height':300};
+        //var chart = new google.charts.Bar(document.getElementById('columnchart_material')); {'packages':['corechart','bar']} 써야 나옴
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(google.visualization.arrayToDataTable(chartData), options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+        chart.draw(data, options);
+        
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+        function selectHandler(e) {
+        	  var row = chart.getSelecttion()[0]["row"]
+        	  var column = chart.getSelecttion()[0]["column"]
+        	  console.log(chart.getSelecttion());
+        	}
       }
     </script>
   </head>
-
   <body>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
   </body>
 </html>
+    

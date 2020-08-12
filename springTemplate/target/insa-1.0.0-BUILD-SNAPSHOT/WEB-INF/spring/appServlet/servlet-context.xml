@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
-	xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -15,8 +18,9 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-		up static resources in the ${webappRoot}/resources directory -->
+		up static resources(정적) in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/images/**" location="/images/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -24,7 +28,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="2"></beans:property>
+		<beans:property name="order" value="3"></beans:property>
 	</beans:bean>
 
 	<context:component-scan
@@ -43,8 +47,13 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
-		<beans:property name="order" value="1" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
+	
+	<beans:bean id="viewResolver"
+    class="org.springframework.web.servlet.view.BeanNameViewResolver">
+    <beans:property name="order" value="1"></beans:property>
+    </beans:bean>
 
 	<!-- MultipartResolver 설정 -->
 	<beans:bean id="multipartResolver"
@@ -77,20 +86,22 @@
 		</beans:bean>
 	</interceptors>
 
+<!-- 	<beans:bean id="beforeAdvice" class="com.dbal.app.common.BeforeAdvice"/>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.dbal..*Impl.*(..))" id="allpointcut"/>
+		<aop:aspect ref="beforeAdvice">
+			<aop:before method="beforeLog" pointcut-ref="allpointcut"/>
+		</aop:aspect>
+	</aop:config> -->
 
-	<beans:bean id="interceptorForExam"
-		class="com.dbal.app.ExamInterceptor">
-	</beans:bean>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>  <!-- aspect관련 annotation을 스캔함 -->
+
+	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+	<!-- 쓰레드 몇개로 할건지 -->
+	<task:scheduler id="jobScheduler" pool-size="10" />	
+	<!-- 스케쥴과 관련된거 다 스캔함 -->
+	<task:annotation-driven scheduler="jobScheduler" />
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/**" />
-			<exclude-mapping path="chart.jsp" />
-			<exclude-mapping path="/add/**" />
-			<exclude-mapping path="/resources/**" />
-			<beans:ref bean="interceptorForExam" />
-		</interceptor>
-	</interceptors>
-
-
+	
+	
 </beans:beans>
