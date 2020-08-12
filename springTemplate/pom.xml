@@ -232,7 +232,15 @@
 			<version>6.13.0</version>
 		</dependency>
 		
+		<!-- excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.14</version>
+		</dependency>
+		
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
