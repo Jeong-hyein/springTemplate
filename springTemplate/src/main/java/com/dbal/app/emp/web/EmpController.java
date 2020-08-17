@@ -165,6 +165,7 @@ public class EmpController {
 		//소스를 받아서 컴파일 할수도 있다. emplist.jrxml을 받아서 emplist.jasper로 만든다 
 		InputStream stream = getClass().getResourceAsStream("/reports/emplist.jrxml");
 		JasperReport jasperReport = JasperCompileManager.compileReport(stream);
+		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("p_departmentId",request.getParameter("dept")); //첫번째자리: 파라미터 이름이랑 동일해야함
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn); 
